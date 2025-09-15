@@ -1,0 +1,1 @@
+Static site for Lyrifall (music-only). Upload all files to Vercel.

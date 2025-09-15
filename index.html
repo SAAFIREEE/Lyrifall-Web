@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lyrifall — Music that Flows</title>
+  <meta name="description" content="Lyrifall is a dedicated music bot for Discord. One command: /setup — then enjoy smooth, high‑quality playback.">
+  <meta property="og:title" content="Lyrifall — Music that Flows">
+  <meta property="og:description" content="One command: /setup. Then press play.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/logo.png">
+  <meta property="og:url" content="https://lyrifall.space/">
+  <link rel="canonical" href="https://lyrifall.space/">
+  <link rel="icon" href="assets/logo.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-aurora">
+  <canvas id="bg" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#">
+        <img src="assets/logo.png" width="30" height="30" alt="Lyrifall logo">
+        <span>Lyrifall</span>
+      </a>
+
+      <nav class="nav" id="nav">
+        <a href="#why">Why</a>
+        <a href="#setup">/setup</a>
+        <a href="#player">Preview</a>
+        <a href="#faq">FAQ</a>
+        <a href="tos.html">Terms</a>
+        <a href="privacy.html">Privacy</a>
+      </nav>
+
+      <div class="cta-wrap">
+        <a class="btn primary" href="https://discord.com/oauth2/authorize?client_id=1208042394813997066&permissions=414468009280&integration_type=0&scope=bot" target="_blank" rel="noopener">Invite</a>
+        <a class="btn ghost" href="https://discord.gg/XTpYaeaCtV" target="_blank" rel="noopener">Support</a>
+        <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero container">
+    <div class="hero-left" data-reveal>
+      <div class="eyebrow">Discord • Music Bot</div>
+      <h1>Music that <span class="grad">flows</span>.</h1>
+      <p class="lead">A calm, focused music bot. <strong>One command</strong> to set up. Then just press play.</p>
+      <div class="actions">
+        <a class="btn primary" href="https://discord.com/oauth2/authorize?client_id=1208042394813997066&permissions=414468009280&integration_type=0&scope=bot" target="_blank" rel="noopener">Invite to Discord</a>
+        <a class="btn ghost" href="https://discord.gg/XTpYaeaCtV" target="_blank" rel="noopener">Join Support</a>
+      </div>
+      <div class="steps" id="setup">
+        <div class="step"><span>1</span> Invite</div>
+        <div class="step"><span>2</span> <code>/setup</code></div>
+        <div class="step"><span>3</span> <code>/play &lt;song&gt;</code></div>
+      </div>
+      <div class="note">No clutter. No bloated menus. Just music.</div>
+    </div>
+
+    <div class="hero-right" data-reveal>
+      <div class="player-mock" id="player">
+        <div class="album-art"></div>
+        <div class="track">
+          <div class="title">Lofi River (feat. Midnight)</div>
+          <div class="meta">Lyrifall • 3:42</div>
+          <div class="bar anim"></div>
+        </div>
+        <div class="controls">
+          <button class="ctrl">⏮</button>
+          <button class="ctrl play">▶</button>
+          <button class="ctrl">⏭</button>
+          <div class="viz" id="viz"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container" id="why">
+    <h2 class="section-title" data-reveal>Why Lyrifall?</h2>
+    <div class="grid features-grid">
+      <article class="card" data-reveal>
+        <div class="icon">⚡</div>
+        <h3>One Command</h3>
+        <p>Type <code>/setup</code>. We configure everything for smooth playback.</p>
+      </article>
+      <article class="card" data-reveal>
+        <div class="icon">🎧</div>
+        <h3>Silky Playback</h3>
+        <p>Robust queuing, loops, and graceful error handling keep the music flowing.</p>
+      </article>
+      <article class="card" data-reveal>
+        <div class="icon">🌙</div>
+        <h3>Minimal by Design</h3>
+        <p>No noise. A relaxing interface that’s easy for everyone.</p>
+      </article>
+      <article class="card" data-reveal>
+        <div class="icon">🛡️</div>
+        <h3>Safe & Respectful</h3>
+        <p>Built to follow Discord rules and your server’s expectations.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="cta-panel" data-reveal>
+      <div class="cta-left">
+        <h3>Ready?</h3>
+        <p class="muted">Click Invite, run <code>/setup</code>, and enjoy the vibes. That’s it.</p>
+      </div>
+      <div class="cta-right">
+        <a class="btn primary" href="https://discord.com/oauth2/authorize?client_id=1208042394813997066&permissions=414468009280&integration_type=0&scope=bot" target="_blank" rel="noopener">Invite</a>
+        <button class="btn copy" data-copy="/setup">Copy /setup</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container" id="faq">
+    <h2 class="section-title" data-reveal>FAQ</h2>
+    <div class="accordion">
+      <details open>
+        <summary>What commands do I need?</summary>
+        <p><code>/setup</code> once. Then <code>/play</code>, <code>/pause</code>, <code>/skip</code>, <code>/queue</code> — the basics.</p>
+      </details>
+      <details>
+        <summary>Is it free?</summary>
+        <p>Yes. Lyrifall’s core music features are free to use.</p>
+      </details>
+      <details>
+        <summary>Who do I contact?</summary>
+        <p>Email <a href="mailto:saafire55@gmail.com">saafire55@gmail.com</a> or join the <a href="https://discord.gg/XTpYaeaCtV" target="_blank" rel="noopener">support server</a>.</p>
+      </details>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="brand mini">
+        <img src="assets/logo.png" width="22" height="22" alt="">
+        <span>Lyrifall</span>
+      </div>
+      <div class="links">
+        <a href="tos.html">Terms</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="https://discord.gg/XTpYaeaCtV" target="_blank" rel="noopener">Support</a>
+        <a href="https://discord.com/oauth2/authorize?client_id=1208042394813997066&permissions=414468009280&integration_type=0&scope=bot" target="_blank" rel="noopener">Invite</a>
+      </div>
+      <p class="muted small">© 2025 Lyrifall • Music that Flows</p>
+    </div>
+  </footer>
+
+  <script defer src="script.js"></script>
+</body>
+</html>
