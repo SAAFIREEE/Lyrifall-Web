@@ -1,9 +1,9 @@
-// Replace these with your real links
-const INVITE_URL  = "#"; // e.g., https://discord.com/oauth2/authorize?client_id=...&scope=bot+applications.commands&permissions=...
-const SUPPORT_URL = "#"; // e.g., https://discord.gg/yourserver
-const GITHUB_URL  = "#"; // e.g., https://github.com/you/lyrifall
+// ---- Set your real links here ----
+const INVITE_URL = "https://discord.com/oauth2/authorize?client_id=1208042394813997066&permissions=414468009280&integration_type=0&scope=bot"; // e.g., https://discord.com/oauth2/authorize?client_id=...&scope=bot+applications.commands&permissions=...
+const SUPPORT_URL = "https://discord.gg/XTpYaeaCtV"; // e.g., https://discord.gg/your-server
+// ----------------------------------
 
-for (const id of ["inviteBtn","inviteBtn2"]) {
+for (const id of ["inviteBtn","inviteBtn2","inviteBtn3"]) {
   const el = document.getElementById(id);
   if (el) el.href = INVITE_URL;
 }
@@ -11,12 +11,8 @@ for (const id of ["supportBtn","supportBtn2"]) {
   const el = document.getElementById(id);
   if (el) el.href = SUPPORT_URL;
 }
-for (const id of ["githubBtn","githubBtn2"]) {
-  const el = document.getElementById(id);
-  if (el) el.href = GITHUB_URL;
-}
 
-// Mobile nav
+// Mobile nav toggle
 const burger = document.getElementById('burger');
 const nav = document.getElementById('nav');
 if (burger && nav) {
@@ -27,67 +23,117 @@ if (burger && nav) {
   });
 }
 
-// Copy buttons
+// Copy /setup
 document.querySelectorAll('.copy').forEach(btn => {
   btn.addEventListener('click', async () => {
-    const text = btn.getAttribute('data-copy') || '';
+    const text = btn.getAttribute('data-copy') || '/setup';
     try {
       await navigator.clipboard.writeText(text);
       const prev = btn.textContent;
       btn.textContent = 'Copied!';
       setTimeout(() => (btn.textContent = prev), 900);
-    } catch {
-      // fallback
-      const ta = document.createElement('textarea');
-      ta.value = text; document.body.appendChild(ta); ta.select();
-      document.execCommand('copy'); document.body.removeChild(ta);
-      btn.textContent = 'Copied!'; setTimeout(() => (btn.textContent = 'Copy'), 900);
-    }
+    } catch {}
   });
 });
 
-// Reveal animations
+// Reveal-on-scroll
 const io = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) e.target.classList.add('is-visible');
-  });
-}, { threshold: 0.12 });
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
+},{threshold:0.12});
 document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
 
-// Theme toggle (dark/light)
-const themeToggle = document.getElementById('themeToggle');
-themeToggle?.addEventListener('click', () => {
-  document.documentElement.classList.toggle('light');
-});
-
-// Tiny glowing canvas bg (no libs)
-const c = document.getElementById('glow');
+// Canvas: animated reactive ring + drifting music notes (simple CPU-friendly)
+const c = document.getElementById('ring');
 if (c) {
   const ctx = c.getContext('2d');
   const DPR = Math.min(2, window.devicePixelRatio || 1);
-  function resize() {
+  function resize(){
     c.width = innerWidth * DPR;
-    c.height = innerHeight * DPR;
+    c.height = Math.max(560, innerHeight * 0.78) * DPR;
   }
   resize();
   addEventListener('resize', resize);
+
+  // floating notes
+  const notes = new Array(24).fill(0).map((_,i)=>{
+    const angle = Math.random()*Math.PI*2;
+    return {
+      x: (Math.random()*innerWidth)*DPR,
+      y: (Math.random()*c.height),
+      s: 0.6 + Math.random()*0.9,
+      v: 0.3 + Math.random()*0.7,
+      a: angle
+    };
+  });
+
   let t = 0;
   function draw() {
-    t += 0.01;
+    t += 0.012;
     ctx.clearRect(0,0,c.width,c.height);
-    const cx = c.width/2, cy = c.height/2;
-    for (let i=0;i<6;i++){
-      const r = 220 + 40*Math.sin(t + i);
-      const x = cx + Math.cos(t*0.6 + i)* (c.width*0.18);
-      const y = cy + Math.sin(t*0.7 + i)* (c.height*0.18);
-      const grad = ctx.createRadialGradient(x,y,0,x,y,r*DPR);
-      grad.addColorStop(0, `rgba(${80+i*25}, ${140+i*10}, 255, 0.08)`);
-      grad.addColorStop(1, 'transparent');
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(x,y,r*DPR,0,Math.PI*2);
-      ctx.fill();
+
+    // gradient bg aura
+    const g = ctx.createLinearGradient(0,0,c.width,0);
+    g.addColorStop(0,'rgba(106,211,255,0.08)'); // ring1
+    g.addColorStop(1,'rgba(122,92,255,0.08)');  // ring2
+    ctx.fillStyle = g;
+    ctx.fillRect(0,0,c.width,c.height);
+
+    const cx = c.width/2;
+    const cy = c.height/2.1;
+    const baseR = Math.min(c.width, c.height)*0.26;
+
+    // outer animated ring (fake "spectrum")
+    for (let i=0;i<160;i++){
+      const p = i/160;
+      const amp = 8 + Math.sin(t*3 + p*16)*10 + Math.cos(t*2 + p*22)*6;
+      const r = baseR + amp*DPR;
+      const a = p*Math.PI*2;
+      const x1 = cx + Math.cos(a)*(r-2*DPR);
+      const y1 = cy + Math.sin(a)*(r-2*DPR);
+      const x2 = cx + Math.cos(a)*r;
+      const y2 = cy + Math.sin(a)*r;
+      ctx.strokeStyle = `rgba(${110+80*p|0}, ${150+40*p|0}, 255, ${0.35+0.35*Math.sin(t+p*6)})`;
+      ctx.lineWidth = 2.2*DPR;
+      ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
     }
+
+    // inner glow
+    const rg = ctx.createRadialGradient(cx,cy,0,cx,cy,baseR*1.1);
+    rg.addColorStop(0,'rgba(122,92,255,0.25)');
+    rg.addColorStop(1,'rgba(122,92,255,0)');
+    ctx.fillStyle = rg;
+    ctx.beginPath(); ctx.arc(cx,cy,baseR*1.1,0,Math.PI*2); ctx.fill();
+
+    // floating music notes
+    notes.forEach(n=>{
+      n.x += Math.cos(n.a)*n.v*DPR;
+      n.y += Math.sin(n.a)*n.v*DPR;
+      n.a += (Math.random()-0.5)*0.01;
+
+      if (n.x < -20*DPR) n.x = c.width+20*DPR;
+      if (n.x > c.width+20*DPR) n.x = -20*DPR;
+      if (n.y < -20*DPR) n.y = c.height+20*DPR;
+      if (n.y > c.height+20*DPR) n.y = -20*DPR;
+
+      ctx.save();
+      ctx.translate(n.x, n.y);
+      ctx.scale(n.s*DPR, n.s*DPR);
+      ctx.fillStyle = 'rgba(216,231,255,0.7)';
+      // simple eighth note shape
+      ctx.beginPath();
+      ctx.moveTo(0,0); ctx.arc(0,0,6,0,Math.PI*2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(6,-12); ctx.lineTo(6,0);
+      ctx.strokeStyle='rgba(216,231,255,0.7)';
+      ctx.lineWidth=2;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(6,-12); ctx.quadraticCurveTo(14,-14,12,-4);
+      ctx.stroke();
+      ctx.restore();
+    });
+
     requestAnimationFrame(draw);
   }
   draw();
