@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lyrifall — Discord Bot</title>
+  <meta name="description" content="Lyrifall is an all‑in‑one Discord bot: music, moderation, reaction roles, tickets, automod, leveling, and more. Free to use.">
+  <meta property="og:title" content="Lyrifall — Discord Bot">
+  <meta property="og:description" content="Music, moderation, reaction roles, tickets, automod, leveling, and more.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/og.png">
+  <link rel="icon" href="assets/logo.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="glow" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#">
+        <img src="assets/logo.svg" alt="" width="28" height="28">
+        <span>Lyrifall</span>
+      </a>
+
+      <nav class="nav" id="nav">
+        <a href="#features">Features</a>
+        <a href="#commands">Commands</a>
+        <a href="#faq">FAQ</a>
+        <a href="tos.html">Terms</a>
+        <a href="privacy.html">Privacy</a>
+      </nav>
+
+      <div class="cta-wrap">
+        <a class="btn primary" id="inviteBtn" href="#" target="_blank" rel="noopener">Invite</a>
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1Zm0 15a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1Zm8-6a1 1 0 0 1 1 1h1a1 1 0 1 1 0 2h-1a1 1 0 1 1-2 0 1 1 0 0 1 1-1Zm-17 1a1 1 0 0 1 1-1H5a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1Zm13.95-6.536a1 1 0 0 1 1.414 0l.707.707a1 1 0 1 1-1.414 1.414l-.707-.707a1 1 0 0 1 0-1.414Zm-11.314 11.314a1 1 0 0 1 1.414 0l.707.707A1 1 0 0 1 6.05 20.95l-.707-.707a1 1 0 0 1 0-1.414ZM3.636 6.343a1 1 0 0 1 1.414-1.414l.707.707A1 1 0 1 1 4.343 7.05l-.707-.707Zm11.314 11.314a1 1 0 0 1 1.414 0l.707.707a1 1 0 1 1-1.414 1.414l-.707-.707a1 1 0 0 1 0-1.414ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z" fill="currentColor"/></svg>
+        </button>
+        <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div class="hero-content" data-reveal>
+        <h1>All‑in‑one bot for your community</h1>
+        <p class="lead">Music · Moderation · Reaction Roles · Tickets · Starboard · Leveling · AutoMod · Logging — <strong>free</strong> and blazing fast.</p>
+        <div class="actions">
+          <a class="btn primary" id="inviteBtn2" href="#" target="_blank" rel="noopener">Invite to Discord</a>
+          <a class="btn ghost" id="supportBtn" href="#" target="_blank" rel="noopener">Join Support</a>
+          <a class="btn ghost" id="githubBtn" href="#" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div class="badges">
+          <span class="badge">Slash + Prefix</span>
+          <span class="badge">Zero‑Config Start</span>
+          <span class="badge">Open & Customizable</span>
+        </div>
+      </div>
+      <div class="hero-art" data-reveal>
+        <img src="assets/preview.png" alt="Bot preview" onerror="this.style.display='none'">
+        <div class="code-card">
+<pre><code>$ /play song name
+$ /verify setup role:@Verified
+$ /rr create &amp; publish
+$ fu!help</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section container">
+      <h2 class="section-title" data-reveal>Everything your server needs</h2>
+      <div class="grid features-grid">
+        <article class="card" data-reveal>
+          <div class="icon">🎧</div>
+          <h3>Music</h3>
+          <p>Queue, skip, autoplay, filters — smooth playback with robust error handling.</p>
+        </article>
+        <article class="card" data-reveal>
+          <div class="icon">🛡️</div>
+          <h3>Moderation</h3>
+          <p>Kick, ban, timeout, purge, warns — role‑gated so only staff see staff tools.</p>
+        </article>
+        <article class="card" data-reveal>
+          <div class="icon">🎟️</div>
+          <h3>Tickets</h3>
+          <p>Open/close flows, private channels, staff tagging, and logs.</p>
+        </article>
+        <article class="card" data-reveal>
+          <div class="icon">⭐</div>
+          <h3>Starboard</h3>
+          <p>Celebrate great messages with thresholds and image embeds.</p>
+        </article>
+        <article class="card" data-reveal>
+          <div class="icon">🧩</div>
+          <h3>Reaction Roles</h3>
+          <p>Beautiful select menus with emoji, no clutter.</p>
+        </article>
+        <article class="card" data-reveal>
+          <div class="icon">📈</div>
+          <h3>Leveling</h3>
+          <p>XP on messages, level‑up pings, and /rank.</p>
+        </article>
+        <article class="card" data-reveal>
+          <div class="icon">🚫</div>
+          <h3>AutoMod</h3>
+          <p>Banned words lists, deletions, and mod‑log embeds.</p>
+        </article>
+        <article class="card" data-reveal>
+          <div class="icon">🧰</div>
+          <h3>Utilities</h3>
+          <p>Tags, reminders, verification buttons, custom prefixes.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="commands" class="section container">
+      <h2 class="section-title" data-reveal>Popular commands</h2>
+      <div class="cmds">
+        <div class="cmd">
+          <code>/play &lt;query&gt;</code>
+          <button class="copy" data-copy="/play ">Copy</button>
+        </div>
+        <div class="cmd">
+          <code>/verify setup role:@Verified</code>
+          <button class="copy" data-copy="/verify setup role:@Verified">Copy</button>
+        </div>
+        <div class="cmd">
+          <code>/rr create</code>
+          <button class="copy" data-copy="/rr create">Copy</button>
+        </div>
+        <div class="cmd">
+          <code>/automod add word:&lt;term&gt;</code>
+          <button class="copy" data-copy="/automod add word:">Copy</button>
+        </div>
+        <div class="cmd">
+          <code>/ticket setup</code>
+          <button class="copy" data-copy="/ticket setup">Copy</button>
+        </div>
+        <div class="cmd">
+          <code>fu!help</code>
+          <button class="copy" data-copy="fu!help">Copy</button>
+        </div>
+      </div>
+      <p class="center note">See everything inside the bot with <strong>fu!help</strong>.</p>
+    </section>
+
+    <section id="faq" class="section container">
+      <h2 class="section-title" data-reveal>FAQ</h2>
+      <div class="accordion">
+        <details open>
+          <summary>How do I add the bot?</summary>
+          <p>Click <em>Invite</em> at the top, select a server, and grant the requested permissions. Then run <code>/setchannels</code> and <code>/verify setup</code> to get going.</p>
+        </details>
+        <details>
+          <summary>Why don’t I see moderation commands?</summary>
+          <p>Only members with the required Discord permissions (Kick/Ban/Moderate/Manage Messages) will see those commands. The help list hides items you can’t use.</p>
+        </details>
+        <details>
+          <summary>Is Lyrifall free?</summary>
+          <p>Yes — core features are free. You can self‑host or use our managed instance.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand mini">
+          <img src="assets/logo.svg" alt="" width="22" height="22">
+          <span>Lyrifall</span>
+        </div>
+        <p class="muted">© 2025 Lyrifall. All rights reserved.</p>
+      </div>
+      <div class="links">
+        <a href="tos.html">Terms</a>
+        <a href="privacy.html">Privacy</a>
+        <a id="supportBtn2" href="#" target="_blank" rel="noopener">Support</a>
+        <a id="githubBtn2" href="#" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="script.js"></script>
+</body>
+</html>
